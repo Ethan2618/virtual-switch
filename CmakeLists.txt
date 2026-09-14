@@ -7,4 +7,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(virtual-switch
     src/main.cpp
+    src/frame.cpp
+    src/switch.cpp
+)
+
+target_include_directories(virtual-switch PRIVATE
+    include
 )
