@@ -2,6 +2,17 @@ cmake_minimum_required(VERSION 3.20)
 
 project(virtual_switch)
 
+enable_testing()
+
+include(FetchContent)
+
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip
+)
+
+FetchContent_MakeAvailable(googletest)
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -14,3 +25,22 @@ add_executable(virtual-switch
 target_include_directories(virtual-switch PRIVATE
     include
 )
+
+
+add_executable(switch-tests
+    tests/switch_tests.cpp
+    src/frame.cpp
+    src/switch.cpp
+)
+
+target_include_directories(switch-tests PRIVATE
+    include
+)
+
+target_link_libraries(switch-tests
+    GTest::gtest_main
+)
+
+include(GoogleTest)
+
+gtest_discover_tests(switch-tests)
